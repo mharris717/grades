@@ -1,3 +1,5 @@
+Run the application with "rake run"
+
 I like to use a module that I wrote called FromHash to eliminate the need for boilerplate constructors in most scenarios. Including FromHash in a class adds a constructor that takes one (optional) argument, a Hash of values to set on the object. This is my personal preference, but others may certainly disagree.
 
 The logic to parse an input row into a StudentClass could live in its own object. If it were more complex, I'd probably create a StudentClassRow class to handle it, but in this scenario it would be overkill.
@@ -18,4 +20,4 @@ I monkeypatched Array with an average method. I acknowledge that in a real appli
 
 The application assumes it will be run from this directory. Often I construct explicit paths with File.dirname(__FILE__), but I did not bother in this case.
 
-All of the application code is in one file. If there was further work to do, I would split grades.rb into seperate files fairly soon. 
+All of the application code is in one file. If there was further work to do, I would split grades.rb into separate files fairly soon. 
