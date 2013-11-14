@@ -4,6 +4,8 @@ I like to use a module that I wrote called FromHash to eliminate the need for bo
 
 The logic to parse an input row into a StudentClass could live in its own object. If it were more complex, I'd probably create a StudentClassRow class to handle it, but in this scenario it would be overkill.
 
+I didn't bother with a Gemfile. 
+
 There is very limited error checking. 
 
 Things that I'm checking:
