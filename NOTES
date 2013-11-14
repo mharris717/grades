@@ -15,3 +15,5 @@ I wrote some reasonable tests. I'm not bothering to isolate the classes from eac
 I decided to round averages to one decimal place. I am not sure to what level of precision a real application would want to round, if at all. This could obviously be changed. 
 
 I monkeypatched Array with an average method. I acknowledge that in a real application this would probably be unwise, but the result was so aesthetically pleasing that I left it in. 
+
+The application assumes it will be run from this directory. Often I construct explicit paths with File.dirname(__FILE__), but I did not bother in this case.
