@@ -1,4 +1,4 @@
-Run the application with "rake run"
+Run the application with "rake run". The application logic is in grades.rb. 
 
 I like to use a module that I wrote called FromHash to eliminate the need for boilerplate constructors in most scenarios. Including FromHash in a class adds a constructor that takes one (optional) argument, a Hash of values to set on the object. This is my personal preference, but others may certainly disagree.
 
