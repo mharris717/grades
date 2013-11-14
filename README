@@ -1,0 +1,15 @@
+You are a computer science professor at Your Favorite University, and
+are in dire need of automatic grading! The good news is you have all of
+your student's assignments in an easy-to-read format, making automation easy!
+
+For each class you teach, you have your grades in a CSV file that contains
+the student name followed by the grade for each assignment. These files are
+located in the `classes` directory. All assignments are based on 100 points
+and are scored in whole numbers. All students have received the same number
+of assignments.
+
+Your task is to produce a grade file for each class. The first line of the
+class grade file should contain the class average. Each additional line
+should contain the student name and their class average separated by a comma.
+The grade files should also be located in the `classes` directory and be
+named similarly, e.g. class_X_grade_averages.txt.
