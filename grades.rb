@@ -96,4 +96,3 @@ module Grades
     ClassInputFile.all.each { |x| x.write! }
   end
 end
-
