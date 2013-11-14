@@ -1,0 +1,17 @@
+I like to use a module that I wrote called FromHash to eliminate the need for boilerplate constructors in most scenarios. Including FromHash in a class adds a constructor that takes one (optional) argument, a Hash of values to set on the object. This is my personal preference, but others may certainly disagree.
+
+The logic to parse an input row into a StudentClass could live in its own object. If it were more complex, I'd probably create a StudentClassRow class to handle it, but in this scenario it would be overkill.
+
+There is very limited error checking. 
+
+Things that I'm checking:
+* All grades are between 0 and 100. 
+* All students in a class have the same number of assignments (in a clumsy way)
+
+Other than that, I am trusting the input. A real application would need more error checking, as well as proper exceptions instead of raising strings.
+
+I wrote some reasonable tests. I'm not bothering to isolate the classes from each other in testing or prepare proper mock data, and the tests for the output file are lacking. A real application would want more tests, as well as tests for the error paths. 
+
+I decided to round averages to one decimal place. I am not sure to what level of precision a real application would want to round, if at all. This could obviously be changed. 
+
+I monkeypatched Array with an average method. I acknowledge that in a real application this would probably be unwise, but the result was so aesthetically pleasing that I left it in. 

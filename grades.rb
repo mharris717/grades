@@ -1,5 +1,16 @@
 require 'csv'
-require 'mharris_ext'
+
+module FromHash
+  def from_hash(ops)
+    ops.each do |k,v|
+      send("#{k}=",v)
+    end
+    self
+  end
+  def initialize(ops={})
+    from_hash(ops)
+  end
+end
 
 class Array
   def average
@@ -12,13 +23,15 @@ module Grades
     include FromHash
     attr_accessor :path
 
-    fattr(:student_classes) do
-      res = []
-      CSV.foreach(path) do |row|
-        grades = row[1..-1].map { |x| x.to_i }
-        res << StudentClass.new(:name => row[0], :grades => grades)
+    def student_classes
+      @student_classes ||= begin
+        res = []
+        CSV.foreach(path) do |row|
+          res << StudentClass.from_row(row)
+        end
+        raise "different number of assignments" unless res.map { |x| x.grades.size }.uniq.size == 1
+        res
       end
-      res
     end
 
     def output_file
@@ -30,8 +43,8 @@ module Grades
     end
 
     class << self
-      fattr(:all) do
-        Dir["classes/*.csv"].map { |x| new(:path => x) }
+      def all
+        @all ||= Dir["classes/*.csv"].map { |x| new(:path => x) }
       end
     end
   end
@@ -48,6 +61,11 @@ module Grades
     def average_grade
       grades.average.round(1)
     end
+
+    def self.from_row(row)
+      grades = row[1..-1].map { |x| x.to_i }
+      new(:name => row[0], :grades => grades)
+    end
   end
 
   class ClassOutputFile
@@ -58,12 +76,9 @@ module Grades
     end
 
     def rows
-      res = []
-      res << [average_grade]
-      res += student_classes.map do |student|
+      [[average_grade]] + student_classes.map do |student|
         [student.name,student.average_grade]
       end
-      res
     end
 
     def output_filename
@@ -72,9 +87,7 @@ module Grades
 
     def write!
       CSV.open("classes/#{output_filename}","w") do |csv|
-        rows.each do |row|
-          csv << row
-        end
+        rows.each { |row| csv << row }
       end
     end
   end

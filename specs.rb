@@ -67,15 +67,26 @@ describe ClassOutputFile do
 
   describe "write!" do
     before do
-      `rm classes/#{file.output_filename}`
       file.write!
     end
     after do
-      
+      `rm classes/#{file.output_filename}`
+    end
+
+    let(:lines) do
+      File.read("classes/class_1_grade_averages.txt").split("\n")
     end
 
     it 'basic file check' do
-      File.read("classes/class_1_grade_averages.txt").split("\n").size.should == 41
+      lines.size.should == 41
+    end
+
+    it 'class average line' do
+      lines.first.strip.should == '77.3'
+    end
+
+    it 'first student line' do
+      lines[1].strip.should == 'Otilia Jones,76.7'
     end
   end
 end
